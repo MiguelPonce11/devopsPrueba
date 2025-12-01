@@ -1,0 +1,13 @@
+title: TechStore Docs
+description: Minimal Jekyll site for GitHub Pages build
+theme: jekyll-theme-primer
+plugins:
+  - jekyll-seo-tag
+  - jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: true
+markdown: kramdown
+exclude:
+  - _site
+  - vendor
