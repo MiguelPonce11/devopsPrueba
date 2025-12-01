@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Tu tienda de tecnología</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=Chivo:wght@900&family=MuseoModerno:wght@500&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Banner Promocional -->
+    <div class="promo-banner">
+        <div class="container-fluid">
+            <div class="promo-content">
+                <p class="promo-text"><strong>20% off on all electronics!</strong> <span>Use code TECH20</span></p>
+                <button class="close-btn" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra de Navegación -->
+    <header class="store-header">
+        <div class="container-fluid">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="#">TechStore</a>
+                </div>
+
+                <div class="nav-links">
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Home <i class="fas fa-chevron-down"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Products <i class="fas fa-chevron-down"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">About Us <i class="fas fa-chevron-down"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Support <i class="fas fa-chevron-down"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Contact <i class="fas fa-chevron-down"></i></a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-icons">
+                    <a href="#" class="icon-link">
+                        <i class="fas fa-search"></i>
+                    </a>
+                    <a href="#" class="icon-link">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="#" class="icon-link">
+                        <i class="fas fa-shopping-bag"></i>
+                    </a>
+                </div>
+            </nav>
+        </div>
+        <div class="header-divider"></div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="main-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <h1 class="hero-title">Explore the Latest in Tech</h1>
+                <div class="hero-image">
+                    <!-- Esta imagen se generará con CSS utilizando un gradiente -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Grid Section -->
+        <section class="product-grid">
+            <div class="container">
+                <!-- Filtros -->
+                <div class="filter-section">
+                    <div class="filter-header">
+                        <div class="filter-categories">
+                            <div class="filter">
+                                <span>Sort by</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="filter">
+                                <span>Brand</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="filter">
+                                <span>Price</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="items-count">10 items</div>
+                    </div>
+
+                    <!-- Grid de Productos -->
+                    <div class="products-container">
+                        <!-- Página 1 -->
+                        <div class="product-page active" data-page="1">
+                            <div class="row">
+                                <!-- Producto 1 -->
+                                <div class="col-md-4">
+                                    <div class="product-card"
+                                        data-description="Potencia tu productividad con la nueva Laptop Pro. Procesador de última generación, 16GB RAM y 512GB SSD. Pantalla Retina de 13 pulgadas.">
+                                        <div class="product-image laptop-pro"></div>
+                                        <div class="product-info">
+                                            <h3 class="product-title">Laptop Pro</h3>
+                                            <p class="product-price">$999</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Producto 2 -->
+                                <div class="col-md-4">
+                                    <div class="product-card"
+                                        data-description="El Smartphone X redefine la elegancia. Cámara de 108MP, batería de larga duración y pantalla OLED de 6.7 pulgadas a 120Hz.">
+                                        <div class="product-image smartphone-x"></div>
+                                        <div class="product-info">
+                                            <h3 class="product-title">Smartphone X</h3>
+                                            <p class="product-price">$799</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Producto 3 -->
+                                <div class="col-md-4">
+                                    <div class="product-card"
+                                        data-description="Tablet S es tu compañera ideal para creatividad y entretenimiento. Compatible con lápiz óptico, pantalla de 11 pulgadas y sonido estéreo.">
+                                        <div class="product-image tablet-s"></div>
+                                        <div class="product-info">
+                                            <h3 class="product-title">Tablet S</h3>
+                                            <p class="product-price">$499</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <!-- Producto 4 -->
+                                <div class="col-md-4">
+                                    <div class="product-card"
+                                        data-description="Domina el juego con esta PC Gaming. Tarjeta gráfica RTX 4070, refrigeración líquida y diseño con luces RGB personalizables.">
+                                        <div class="product-image gaming-pc"></div>
+                                        <div class="product-info">
+                                            <h3 class="product-title">Gaming PC</h3>
+                                            <p class="product-price">$1499</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Producto 5 -->
+                                <div class="col-md-4">
+                                    <div class="product-card"
+                                        data-description="Mantente conectado y saludable con el Smartwatch Z. Monitoreo de ritmo cardíaco, GPS integrado y resistencia al agua hasta 50m.">
+                                        <div class="product-image smartwatch-z"></div>
+                                        <div class="product-info">
+                                            <h3 class="product-title">Smartwatch Z</h3>
+                                            <p class="product-price">$199</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Producto 6 -->
+                                <div class="col-md-4">
+                                    <div class="product-card"
+                                        data-description="Libertad total con los Wireless Earbuds. Cancelación de ruido activa, 24 horas de batería con el estuche y sonido de alta fidelidad.">
+                                        <div class="product-image wireless-earbuds"></div>
+                                        <div class="product-info">
+                                            <h3 class="product-title">Wireless Earbuds</h3>
+                                            <p class="product-price">$99</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <!-- Producto 7 -->
+                                <div class="col-md-4">
+                                    <div class="product-card"
+                                        data-description="Visualiza cada detalle con el Monitor 4K. Panel IPS de 27 pulgadas, cobertura de color 99% sRGB y diseño sin bordes.">
+                                        <div class="product-image monitor-4k"></div>
+                                        <div class="product-info">
+                                            <h3 class="product-title">4K Monitor</h3>
+                                            <p class="product-price">$299</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Producto 8 -->
+                                <div class="col-md-4">
+                                    <div class="product-card"
+                                        data-description="Lleva la música a todas partes. Altavoz Bluetooth con sonido 360 grados, resistente a golpes y salpicaduras. 12 horas de reproducción.">
+                                        <div class="product-image bluetooth-speaker"></div>
+                                        <div class="product-info">
+                                            <h3 class="product-title">Bluetooth Speaker</h3>
+                                            <p class="product-price">$129</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Producto 9 -->
+                                <div class="col-md-4">
+                                    <div class="product-card"
+                                        data-description="Sumérgete en nuevos mundos con el VR Headset. Resolución 4K por ojo, seguimiento preciso y biblioteca de juegos inmersivos.">
+                                        <div class="product-image vr-headset"></div>
+                                        <div class="product-info">
+                                            <h3 class="product-title">VR Headset</h3>
+                                            <p class="product-price">$399</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Página 2 -->
+                        <div class="product-page" data-page="2" style="display: none;">
+                            <div class="row">
+                                <!-- Producto 10 (Nuevo) -->
+                                <div class="col-md-4">
+                                    <div class="product-card"
+                                        data-description="Experimenta la próxima generación de juegos con la Console Game X. Gráficos 8K, SSD ultrarrápido y retrocompatibilidad total.">
+                                        <div class="product-image console-game"></div>
+                                        <div class="product-info">
+                                            <h3 class="product-title">Console Game X</h3>
+                                            <p class="product-price">$3000</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Paginación -->
+                    <div class="pagination">
+                        <div class="page active">1</div>
+                        <div class="page">2</div>
+                        <div class="page next">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-divider"></div>
+            <div class="footer-content">
+                <div class="footer-logo-section">
+                    <div class="logo">TechStore</div>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Track Order</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+
+                <div class="newsletter">
+                    <h4>Subscribe to our newsletter</h4>
+                    <p>Stay updated with the latest tech news and offers.</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Email address" class="email-input">
+                        <button class="subscribe-btn">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS y Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script personalizado -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>
