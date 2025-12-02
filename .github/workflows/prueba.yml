@@ -1,152 +1,49 @@
-name: HTML Validation and Info Extract
+name: Basic HTML Check
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch:
 
 jobs:
-  validate-and-extract:
+  html-check:
     runs-on: ubuntu-latest
     permissions:
       contents: write
       
     steps:
-      - name: Checkout repository
+      - name: Get code
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: Extract title from index.html
+        
+      - name: Extract title
         run: |
-          echo "Extracting title from index.html..."
+          echo "Looking for title in index.html..."
+          title=$(grep -o '<title>[^<]*</title>' index.html | sed 's/<[^>]*>//g')
+          echo "Found title: $title"
+          echo "$title" > title.txt
           
-          # Método 1: Usar grep (más confiable)
-          if grep -q '<title>' index.html; then
-            title=$(grep -o '<title>[^<]*</title>' index.html | sed 's/<title>//g' | sed 's/<\/title>//g')
-            echo "Title found: $title"
-            echo "$title" > extracted-title.txt
-          else
-            echo "WARNING: No title tag found"
-            echo "No title found" > extracted-title.txt
-          fi
-          
-      - name: Extract basic HTML info
+      - name: Count HTML elements
         run: |
-          echo "Gathering HTML statistics..."
+          echo "Counting HTML elements..."
+          divs=$(grep -c '<div' index.html || echo 0)
+          images=$(grep -c '<img' index.html || echo 0)
+          links=$(grep -c '<a' index.html || echo 0)
           
-          # Contar líneas
-          lines=$(wc -l < index.html)
-          echo "Total lines: $lines"
+          echo "DIVs: $divs"
+          echo "Images: $images" 
+          echo "Links: $links"
           
-          # Contar elementos comunes
-          divs=$(grep -o '<div' index.html | wc -l)
-          imgs=$(grep -o '<img' index.html | wc -l)
-          links=$(grep -o '<a' index.html | wc -l)
+          echo "HTML Stats:" > stats.txt
+          echo "DIVs: $divs" >> stats.txt
+          echo "Images: $images" >> stats.txt
+          echo "Links: $links" >> stats.txt
           
-          # Crear reporte
-          cat > html-report.txt << EOF
-          HTML Analysis Report
-          ====================
-          Generated: $(date -u +'%Y-%m-%d %H:%M:%S UTC')
-          
-          File: index.html
-          Total lines: $lines
-          DIV elements: $divs
-          IMG elements: $imgs
-          Links (A elements): $links
-          
-          Title: $(cat extracted-title.txt)
-          EOF
-          
-          echo "Report generated:"
-          cat html-report.txt
-          
-      - name: Update build timestamp
+      - name: Add timestamp
         run: |
-          echo "Updating build timestamp..."
+          echo "Adding build time..."
+          echo "<!-- Last updated: $(date) -->" >> index.html
           
-          timestamp="$(date -u +'%Y-%m-%d %H:%M:%S UTC')"
-          
-          # Buscar y actualizar timestamp
-          if grep -q '<!-- BUILD_TIMESTAMP -->' index.html; then
-            sed -i "s/<!-- BUILD_TIMESTAMP -->.*/<!-- BUILD_TIMESTAMP --> Built: ${timestamp}/" index.html
-            echo "Timestamp updated: $timestamp"
-          else
-            echo "<!-- BUILD_TIMESTAMP --> Built: ${timestamp}" >> index.html
-            echo "Timestamp added: $timestamp"
-          fi
-          
-      - name: Validate HTML syntax (basic)
-        run: |
-          echo "Running basic HTML validation..."
-          
-          # Validaciones básicas
-          errors=0
-          
-          # Verificar que las etiquetas básicas existan
-          if ! grep -q '<html' index.html; then
-            echo "ERROR: Missing <html> tag"
-            ((errors++))
-          fi
-          
-          if ! grep -q '<head' index.html; then
-            echo "ERROR: Missing <head> tag"
-            ((errors++))
-          fi
-          
-          if ! grep -q '<body' index.html; then
-            echo "ERROR: Missing <body> tag"
-            ((errors++))
-          fi
-          
-          if ! grep -q '<title>' index.html; then
-            echo "WARNING: Missing <title> tag"
-            ((errors++))
-          fi
-          
-          # Verificar etiquetas cerradas básicas
-          open_divs=$(grep -o '<div' index.html | wc -l)
-          close_divs=$(grep -o '</div>' index.html | wc -l)
-          
-          if [ "$open_divs" -ne "$close_divs" ]; then
-            echo "WARNING: Unmatched div tags: $open_divs opened, $close_divs closed"
-            ((errors++))
-          fi
-          
-          if [ $errors -eq 0 ]; then
-            echo "SUCCESS: Basic HTML validation passed!"
-          else
-            echo "WARNING: Found $errors potential issues"
-          fi
-          
-      - name: Commit changes (if any)
+      - name: Save changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Auto-update: HTML analysis and timestamp [skip ci]"
-          file_pattern: |
-            index.html
-            extracted-title.txt
-            html-report.txt
-            
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: html-analysis-report
-          path: |
-            extracted-title.txt
-            html-report.txt
-          retention-days: 30
-          
-      - name: Create summary
-        run: |
-          echo "## HTML Analysis Summary" >> $GITHUB_STEP_SUMMARY
-          echo "- **File analyzed**: index.html" >> $GITHUB_STEP_SUMMARY
-          echo "- **Title**: $(cat extracted-title.txt)" >> $GITHUB_STEP_SUMMARY
-          echo "- **Analysis time**: $(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Full Report" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          cat html-report.txt >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
+          commit_message: "Update HTML stats"
+          file_pattern: "*.txt index.html"
