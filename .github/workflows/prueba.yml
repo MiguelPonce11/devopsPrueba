@@ -1,0 +1,30 @@
+name: prueba
+
+on: 
+  schedule:
+    - cron: '0 14 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout html
+        uses: actions/checkout@v3
+
+      - name: Setup htmlq
+        uses: remarkablemark/setup-htmlq@v2
+        with:
+          htmlq-version: 0.4.0
+
+      - name: Run script
+        run: htmlq ./index.html
+
+      - name: Commit and push changes 
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+            commit_message: Update 
+      
