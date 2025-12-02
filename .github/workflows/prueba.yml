@@ -21,10 +21,28 @@ jobs:
         with:
           htmlq-version: 0.4.0
 
-      - name: Run script
-        run: htmlq ./index.html
+      - name: Extract <title> from index.html
+        run: |
+          set -e
+          htmlq -p 'title' ./index.html > extracted-title.txt
+          echo "Extracted title:"; cat extracted-title.txt
+
+      - name: Update timestamp in index.html
+        run: |
+          set -e
+          TS="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          # Si existe el marcador <!-- BUILD_TIMESTAMP -->, lo reemplaza; si no, agrega al final
+          if grep -q '<!-- BUILD_TIMESTAMP -->' index.html; then
+            sed -i "s/<!-- BUILD_TIMESTAMP -->.*/<!-- BUILD_TIMESTAMP --> ${TS}/" index.html
+          else
+            echo "<!-- BUILD_TIMESTAMP --> ${TS}" >> index.html
+          fi
+          git status --porcelain
 
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Update index.html"
+          file_pattern: |
+            index.html
+            extracted-title.txt
